@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block title %}NEW SHORT URL{% endblock %}
+
+{% block page_content %}
+
+<p><a href="{% if urlname %}{{ urlname }}{% else %}Stranger{% endif %}">Old URL</a></p>
+<p>has been changed to</p>
+<p><a href="{% if user.shorturl %}{{ user.shorturl }}{% else %}Stranger{% endif %}">New URL</a>
+
+{% endblock %}

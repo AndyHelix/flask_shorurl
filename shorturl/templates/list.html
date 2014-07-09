@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}All Of Urls{% endblock %}
+
+{% block page_content %}
+{#
+<p><a href="{% if urlname %}{{ urlname }}{% else %}Stranger{% endif %}">Old URL</a></p>
+<p>has been changed to</p>
+<p><a href="{% if user.shorturl %}{{ user.shorturl }}{% else %}Stranger{% endif %}">New URL</a>
+#}
+
+<div class="list-group">
+    {% for l in urllist %}
+    <a href="{% if l.username %}{{ l.username }}{% else %}http://github.com/{% endif %}" class="list-group-item list-group-item-success">OLD LINK</a>
+    <a href="{% if l.shorturl %}{{ l.shorturl }}{% else %}http://gitcafe.com/{% endif %}" class="list-group-item list-group-item-info">NEW LINK</a>
+    {% endfor %}
+  <!--
+  <a href="#" class="list-group-item list-group-item-info">Cras sit amet nibh libero</a>
+  <a href="#" class="list-group-item list-group-item-warning">Porta ac consectetur ac</a>
+  <a href="#" class="list-group-item list-group-item-danger">Vestibulum at eros</a>
+-->
+</div>
+
+{% endblock %}

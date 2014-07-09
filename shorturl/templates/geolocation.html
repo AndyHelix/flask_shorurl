@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>HTML5 Geolocation Example</title>
+<script>
+function HTML5Geolocation() {
+ var geolocationSupport;
+ if (navigator.geolocation) {
+  geolocationSupport = document.getElementById("yes");
+  geolocationSupport.style.visibility = "visible"
+
+  navigator.geolocation.getCurrentPosition(displayGeolocation);
+ } else {
+  geolocationSupport = document.getElementById("no");
+  geolocationSupport.style.visibility = "hidden"
+ }
+}
+
+function displayGeolocation(geolocation) {
+ var latitude = geolocation.coords.latitude;
+ var longitude = geolocation.coords.longitude;
+
+ document.getElementById("latitude").innerHTML = latitude;
+ document.getElementById("longitude").innerHTML = longitude;
+
+ var mapholder = document.getElementById("mapholder")
+ var mapcenter = new google.maps.LatLng(latitude, longitude)
+ var myOptions = {
+  zoom: 14,
+  center: mapcenter,
+  mapTypeId: google.maps.MapTypeId.SATELLITE, // ROADMAP, SATELLITE, HYBRID, TERRAIN
+  mapTypeControl: false,
+  navigationControlOptions: { style: google.maps.NavigationControlStyle.SMALL }
+ };
+ var map = new google.maps.Map(document.getElementById("mapholder"), myOptions);
+ var marker = new google.maps.Marker({ position: mapcenter, map: map, title: "Your current position!" });
+}
+</script>
+</head>
+<body onload="javascript:HTML5Geolocation();">
+<section>
+<head>
+<h1>HTML5 Geolocation Example</h1>
+</head>
+<article>
+<b>HTML5 browser support</b>:<br />
+<span id="yes" style="visibility:hidden">Your web browser supports <b>HTML5 Geolocation API</b>.</span>
+<span id="no" style="visibility:hidden">Your web browser does not support <b>HTML5 Geolocation API</b>.</span><br /><br />
+</article>
+<article>
+Your current position:<br />
+Latitude: <span id="latitude"></span><br />
+Longitude: <span id="longitude"></span>
+</article>
+</section>
+</body>
+</html>
